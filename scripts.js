@@ -13,11 +13,11 @@ form.addEventListener("submit", (event) => {
     return; 
   }
 
-  // Conert inputs to numbers
+  // Convert inputs to numbers
   const dividendNumber = Number(dividend);
   const dividerNumber = Number(divider);
 
-  // Errow handling: checking if inputs are valid numbers
+  // Error handling: checking if inputs are valid numbers
 
   if(isNaN(dividendNumber) || isNaN(dividerNumber)){
     result.textContent = "Invalid input: Please enter valid numeric values";
