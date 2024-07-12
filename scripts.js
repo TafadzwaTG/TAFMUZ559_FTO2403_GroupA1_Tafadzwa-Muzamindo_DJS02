@@ -3,15 +3,16 @@ const result = document.querySelector("[data-result]");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+
+try {
   const formData = new FormData(event.target);
   const dividend = formData.get("dividend");
   const divider = formData.get("divider");
 
 // Error handling: checking if inputs are empty
   if(!dividend || !divider) {
-    result.textContent = "Division not performed. Both values are required in inputs. Try again"; 
-    return; 
-  }
+    throw new Error ("Division not performed. Both values are required in inputs. Try again"); 
+   }
 
   // Convert inputs to numbers
   const dividendNumber = Number(dividend);
@@ -20,19 +21,21 @@ form.addEventListener("submit", (event) => {
   // Error handling: checking if inputs are valid numbers
 
   if(isNaN(dividendNumber) || isNaN(dividerNumber)){
-    result.textContent = "Invalid input: Please enter valid numeric values";
-    return;
+    throw new Error("Invalid input: Please enter valid numeric values");
   }
+
   // Errow handling: checking for division by zero
   if(dividerNumber === 0) {
-    result.textContent = "Invalid input: Division by zero not allowed";
-    return;
-  }
+    throw new Error ("Invalid input: Division by zero not allowed");
+    }
 
  //Perform division
   const divisionResult = dividendNumber / dividerNumber;
 
   //Display result 
   result.textContent = `Result: ${divisionResult}`;
- 
+
+} catch (error) {
+  result.textContent = error.message;
+}
 });
